@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>文化再詮釋｜台中科博館木乃伊</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>資訊擴展：木乃伊的歷史與文化脈絡</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="mode1.html">原貌再現</a></li>
+        <li><a href="mode2.html">資訊擴展</a></li>
+        <li><a href="mode3.html">文化再詮釋</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="section">
+      <h2>🧪 木乃伊製作問答挑戰</h2>
+      <div class="quiz" id="quiz-area">
+        <p id="quiz-question"></p>
+        <div id="quiz-options"></div>
+      </div>
+      <div id="result"></div>
+    </div>
+
+    <div class="section">
+      <h2>📣 留言互動牆</h2>
+      <input type="text" id="user-message" placeholder="對木乃伊說一句話..." size="40" />
+      <button onclick="postMessage()">送出</button>
+      <ul id="message-wall"></ul>
+    </div>
+  </main>
+
+  <script>
+    const questions = [
+      { q: "你會選擇哪種防腐香料？", options: ["天然鹽 (Natron)", "蜂蜜", "蓮花精油"], correct: 0 },
+      { q: "木乃伊製作時，哪個器官會保留？", options: ["腦部", "心臟", "肺臟"], correct: 1 },
+      { q: "木乃伊完成後會放入？", options: ["金棺材", "石棺", "紙箱"], correct: 1 },
+      { q: "古埃及人使用哪種植物油製作木乃伊？", options: ["橄欖油", "蓖麻油", "椰子油"], correct: 1 },
+      { q: "哪一個器官會在罐子裡保存？", options: ["肝臟", "胃", "心臟"], correct: 0 },
+      { q: "製作木乃伊時首先會？", options: ["包裹屍體", "移除內臟", "製作棺木"], correct: 1 },
+      { q: "木乃伊製作歷程約需多久？", options: ["10天", "40天", "70天"], correct: 2 },
+      { q: "用來包裹屍體的布料是？", options: ["絲綢", "棉布", "亞麻布"], correct: 2 },
+      { q: "古埃及的木乃伊象徵什麼？", options: ["重生與永恆", "懲罰與懼怕", "死亡與終結"], correct: 0 },
+      { q: "防腐程序中會用到什麼粉末？", options: ["白堊粉", "香料粉末", "石灰粉"], correct: 1 }
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    function renderQuestion() {
+      if (current >= questions.length) {
+        let feedback = "";
+        if (score >= 9) {
+          feedback = "🏆 你是木乃伊製作大師！完美通過！";
+        } else if (score >= 6) {
+          feedback = "👍 不錯的表現，你對木乃伊製作已有不錯的理解。";
+        } else if (score >= 3) {
+          feedback = "🧐 還不夠熟練，多了解一下木乃伊的祕密吧～";
+        } else {
+          feedback = "😅 看來你需要重新閱讀相關資料！";
+        }
+        document.getElementById("quiz-area").innerHTML = `✅ 完成所有題目！<br>你答對了 ${score} / ${questions.length} 題。<br>${feedback}`;
+        return;
+      }
+
+      const q = questions[current];
+      document.getElementById("quiz-question").textContent = q.q;
+      const options = document.getElementById("quiz-options");
+      options.innerHTML = "";
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (idx === q.correct) {
+            document.getElementById("result").textContent = "✔️ 回答正確！";
+            score++;
+          } else {
+            document.getElementById("result").textContent = "❌ 這不是最佳選擇喔～";
+          }
+          current++;
+          setTimeout(() => {
+            document.getElementById("result").textContent = "";
+            renderQuestion();
+          }, 1000);
+        };
+        options.appendChild(btn);
+      });
+    }
+
+    renderQuestion();
+
+    function postMessage() {
+      const input = document.getElementById("user-message");
+      const text = input.value.trim();
+      if (!text) return;
+      const li = document.createElement("li");
+      li.textContent = text;
+      document.getElementById("message-wall").appendChild(li);
+      input.value = "";
+    }
+  </script>
+
+  <section class="section">
+  <h2>🧠 木乃伊文物記憶配對</h2>
+  <p>點擊卡片配對木乃伊相關物品與名稱，全部完成即通關！</p>
+  <div id="memory-board" style="display: grid; grid-template-columns: repeat(4, 100px); gap: 10px; justify-content: center;"></div>
+  <p id="memory-message" style="margin-top: 1em; font-weight: bold;"></p>
+</section>
+
+<script>
+  const pairs = [
+    { name: "木乃伊", img: "mummy.png" },
+    { name: "罐子", img: "canopic_jar.png" },
+    { name: "護符", img: "amulet.png" },
+    { name: "阿努比斯", img: "anubis.png" }
+  ];
+
+  let cards = [...pairs, ...pairs].sort(() => Math.random() - 0.5);
+  let board = document.getElementById("memory-board");
+  let message = document.getElementById("memory-message");
+  let firstCard = null, secondCard = null, matched = 0;
+
+  function renderCards() {
+    board.innerHTML = "";
+    cards.forEach((card, i) => {
+      let btn = document.createElement("button");
+      btn.innerHTML = `<img src="images/back.png" alt="back" width="100" height="100">`;
+      btn.dataset.name = card.name;
+      btn.dataset.img = card.img;
+      btn.dataset.index = i;
+      btn.onclick = () => flipCard(btn);
+      board.appendChild(btn);
+    });
+  }
+
+  function flipCard(btn) {
+    if (btn.disabled || secondCard) return;
+    btn.innerHTML = `<img src="${btn.dataset.img}" alt="${btn.dataset.name}" width="100" height="100">`;
+    btn.disabled = true;
+
+    if (!firstCard) {
+      firstCard = btn;
+    } else {
+      secondCard = btn;
+      if (firstCard.dataset.name === secondCard.dataset.name) {
+        matched++;
+        firstCard = secondCard = null;
+        if (matched === pairs.length) {
+          message.textContent = "🎉 全部配對成功！你對木乃伊文物十分熟悉！";
+        }
+      } else {
+        setTimeout(() => {
+          firstCard.innerHTML = `<img src="images/back.png" alt="back" width="100" height="100">`;
+          secondCard.innerHTML = `<img src="images/back.png" alt="back" width="100" height="100">`;
+          firstCard.disabled = false;
+          secondCard.disabled = false;
+          firstCard = secondCard = null;
+        }, 800);
+      }
+    }
+  }
+
+  renderCards();
+</script>
+
+<section class="section">
+  <h2>🎭 製作你的木乃伊角色卡</h2>
+  <p>點擊下方按鈕，看看你是怎樣的木乃伊吧！</p>
+  <button onclick="generateMummy()">生成角色卡</button>
+  <div id="mummy-result" style="margin-top: 1em; font-weight: bold;"></div>
+</section>
+
+<script>
+  const identities = [
+    { name: "皇家書吏", img: "scribe.png" },
+    { name: "勇士將軍", img: "general.png" },
+    { name: "女祭司", img: "priestess.png" },
+    { name: "農夫", img: "farmer.png" },
+    { name: "商人", img: "merchant.png" },
+    { name: "小丑", img: "jester.png" }
+  ];
+  const reasons = ["追求永生", "受命國王指示", "為守護神殉道", "為了愛而自願"];
+  const gods = ["阿努比斯", "伊西斯", "荷魯斯", "圖特", "拉神"];
+
+  function generateMummy() {
+    const identity = identities[Math.floor(Math.random() * identities.length)];
+    const reason = reasons[Math.floor(Math.random() * reasons.length)];
+    const god = gods[Math.floor(Math.random() * gods.length)];
+    document.getElementById("mummy-result").innerHTML = `
+      <img src="${identity.img}" alt="${identity.name}" width="200"><br>
+      🏺 你是 <strong>${identity.name}</strong><br>
+      ✨ 你被製成木乃伊是因為：<em>${reason}</em><br>
+      🔱 守護你的神祇是：<strong>${god}</strong>
+    `;
+  }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #343a40;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  padding: 2em;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #007BFF;
+  color: white;
+  padding: 1em 2em;
+  margin: 1em;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+footer {
+  text-align: center;
+  padding: 1em;
+  background-color: #eee;
+}
+
+iframe {
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  margin: 2em auto;
+  display: block;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  background-color: #f8f9fa;
+}
+
+header {
+  background-color: #2f353a;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8em;
+  color: white;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main {
+  padding: 2em;
+  background-color: #f8f9fa;
+}
+
+h1, h2 {
+  color: #552f1c;
+}
+
+button {
+  padding: 0.5em 1em;
+  margin-top: 0.5em;
+  cursor: pointer;
+}
+
+.section {
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+.quiz {
+  margin-top: 1em;
+}
+
+.quiz p {
+  margin: 0.5em 0;
+}
+
+.quiz button {
+  margin: 0.3em;
+}
+
+#result {
+  margin-top: 1em;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#message-wall {
+  list-style: none;
+  padding: 0;
+}
+
+#message-wall li {
+  background: #fff;
+  padding: 0.5em;
+  margin: 0.3em auto;
+  border-left: 4px solid #ccc;
+  max-width: 400px;
+  text-align: left;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2em;
+  font-family: "Noto Serif TC", serif;
+  line-height: 1.9;
+  color: #2c2c2c;
+  background-color: #fffdf9;
+}
+
+section {
+  margin-bottom: 3em;
+}
+
+h2 {
+  color: #5a2d1d;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.3em;
+  margin-bottom: 1em;
+  font-size: 1.6em;
+  text-align: center;
+}
+
+p {
+  text-align: justify;
+  font-size: 1.1em;
+  margin-bottom: 1.5em;
+  letter-spacing: 0.05em;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1em auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
